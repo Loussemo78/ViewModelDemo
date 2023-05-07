@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.viewmodeldemo.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         })*/
         // stateflow contrairement à livedata ne suit pas le cyle de vie doit le mettre dans le scope
         lifecycleScope.launchWhenCreated {
+            viewModel.flowTotal.collect{
+                binding.resultTextView.text = it.toString()
+            }
 
         }
 
